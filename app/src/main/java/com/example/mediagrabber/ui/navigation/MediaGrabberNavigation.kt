@@ -19,8 +19,8 @@ class MediaGrabberNavigationActions(navController: NavHostController) {
             restoreState = true
         }
     }
-    val navigateToDownload: () -> Unit = {
-        navController.navigate(MediaGrabberDestinations.DOWNLOAD_ROUTE) {
+    val navigateToDownload: (socialMedia:String) -> Unit = {socialMedia ->
+        navController.navigate("${MediaGrabberDestinations.DOWNLOAD_ROUTE}/$socialMedia") {
             popUpTo(navController.graph.findStartDestination().id) {
                 saveState = true
             }
