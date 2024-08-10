@@ -2,17 +2,16 @@ package com.example.mediagrabber.data.source.remote.api
 
 import com.example.mediagrabber.data.source.remote.model.FacebookDownloaderResponse
 import com.example.mediagrabber.data.source.remote.model.InstagramDownloaderRequestBody
+import com.example.mediagrabber.data.source.remote.model.InstagramPhotosDownloaderResponse
+import com.example.mediagrabber.data.source.remote.model.InstagramReelDownloaderResponse
 import com.example.mediagrabber.data.source.remote.model.LinkedInDownloaderResponse
 import com.example.mediagrabber.data.source.remote.model.PinterestDownloaderResponse
 import com.example.mediagrabber.data.source.remote.model.SoundCloudDownloaderResponse
 import com.example.mediagrabber.data.source.remote.model.TikTokDownloaderResponse
-import okhttp3.ResponseBody
+import com.example.mediagrabber.data.source.remote.model.YoutubeDownloaderResponse
 import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.GET
 import retrofit2.http.POST
-import retrofit2.http.Streaming
-import retrofit2.http.Url
 
 interface MediaGrabberApiService {
 
@@ -24,12 +23,17 @@ interface MediaGrabberApiService {
     @POST("ytloader.php")
     suspend fun getYoutubeDownloadableUrl(
         @Body url: String
-    ): Response<FacebookDownloaderResponse>
+    ): Response<YoutubeDownloaderResponse>
 
     @POST("insta.php")
-    suspend fun getInstagramDownloadableUrl(
+    suspend fun getInstagramPhotosDownloadableUrl(
         @Body instagramDownloaderRequestBody: InstagramDownloaderRequestBody
-    ): Response<FacebookDownloaderResponse>
+    ): Response<InstagramPhotosDownloaderResponse>
+
+    @POST("insta.php")
+    suspend fun getInstagramReelDownloadableUrl(
+        @Body instagramDownloaderRequestBody: InstagramDownloaderRequestBody
+    ): Response<InstagramReelDownloaderResponse>
 
     @POST("scloader.php")
     suspend fun getSoundCloudDownloadableUrl(
@@ -51,9 +55,6 @@ interface MediaGrabberApiService {
         @Body url: String
     ): Response<PinterestDownloaderResponse>
 
-    @Streaming
-    @GET
-    suspend fun downloadFile(@Url fileUrl: String): Response<ResponseBody>
 
 
 }
