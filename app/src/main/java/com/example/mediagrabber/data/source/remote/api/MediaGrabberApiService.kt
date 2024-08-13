@@ -1,21 +1,16 @@
 package com.example.mediagrabber.data.source.remote.api
 
-import com.example.mediagrabber.data.source.remote.model.FacebookDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.InstagramDownloaderRequestBody
-import com.example.mediagrabber.data.source.remote.model.InstagramPhotosDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.InstagramReelDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.LinkedInDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.PinterestDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.SoundCloudDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.TikTokDownloaderResponse
-import com.example.mediagrabber.data.source.remote.model.YoutubeDownloaderResponse
+
+import com.example.mediagrabber.BuildConfig
+import com.example.mediagrabber.data.source.remote.model.DownloadResponse
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Query
 
 interface MediaGrabberApiService {
 
-    @POST("fbloader.php")
+    /*@POST("fbloader.php")
     suspend fun getFacebookDownloadableUrl(
         @Body url: String
     ): Response<FacebookDownloaderResponse>
@@ -53,7 +48,15 @@ interface MediaGrabberApiService {
     @POST("pineterestloader.php")
     suspend fun getPinterestDownloadableUrl(
         @Body url: String
-    ): Response<PinterestDownloaderResponse>
+    ): Response<PinterestDownloaderResponse>*/
+
+
+    @GET("all")
+    suspend fun getDownloadableUrls(
+        @Query("url") url: String,
+        @Header("x-rapidapi-host") host: String = "social-media-video-downloader.p.rapidapi.com",
+        @Header("x-rapidapi-key") apiKey: String = BuildConfig.API_KEY
+    ): Response<DownloadResponse>
 
 
 
