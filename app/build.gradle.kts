@@ -28,6 +28,7 @@ android {
         properties.load(project.rootProject.file("local.properties").inputStream())
 
         buildConfigField("String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\"")
+        buildConfigField("String", "API_KEY", "\"${properties.getProperty("API_KEY")}\"")
 
     }
 
@@ -98,6 +99,9 @@ dependencies {
     // Retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.moshi)
+
+    // Coil
+    implementation(libs.coil.compose)
 
 
 
